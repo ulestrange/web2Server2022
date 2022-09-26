@@ -13,17 +13,17 @@ router.post('/books', (req, res) => {
 
 });
 
-router.get('/books', (req, res) => {
+router.get('/', (req, res) => {
     res.send(books);
 })
 
-router.get('/books/:id', (req,res) => {
+router.get(':id', (req,res) => {
 
     let id = req.params.id;
      res.json(books[id]);
  })
 
- router.delete('/books/:id',(req, res) =>
+ router.delete('/:id',(req, res) =>
  {
     let id = req.params.id; 
     console.log(`removing book ${books[id].name}`)
