@@ -1,35 +1,68 @@
 const express = require('express');
+const { Book } = require('../models/books')
 
 const router = express.Router();
 
 let books = [];
 
-router.post('/books', (req, res) => {
-    const book = req.body;
-    books.push(book);
+router.post('/', async (req, res) => {
+  let book = new Book(req.body);
 
-    res.send ('book has been added to the database');
-    console.log(`book name is ${book.name} number of book is ${books.length}`);
+  try {
+    book = await book.save();
+    res
+      .location(`${book._id}`)
+      .status(201)
+      .json(book)
+  }
+  catch (error) {
+    res.status(500).send('db_error ' + error)
+  }
 
 });
 
-router.get('/', (req, res) => {
-    res.send(books);
+
+router.get('/', async (req, res) => {
+
+  try {
+    const books = await Book.find().lean();
+    res.json(books);
+  }
+  catch (error) {
+    res.status(500).json('db error ' + error)
+  }
 })
 
-router.get(':id', (req,res) => {
+router.get('/:id', async (req, res) => {
 
-    let id = req.params.id;
-     res.json(books[id]);
- })
+  try {
 
- router.delete('/:id',(req, res) =>
- {
-    let id = req.params.id; 
-    console.log(`removing book ${books[id].name}`)
-    books.splice(req.params.id, 1);
-    res.send(books);
+    const book = await Book.findById(req.params.id);
+    if (book) {
+      res.json(book);
+    }
+    else {
+      res.status(404).json('Not found');
+    }
+  }
+  catch (error) {
+    res.status(404).json('Not found: id is weird ' + error);
+  }
 
-  })
+})
 
-  module.exports = router;
+router.delete('/:id', async (req, res) => {
+  try {
+    const book = await Book.findByIdAndDelete(req.params.id);
+    if (book)
+      res.status(204).send();
+    else
+      res.status(404).json(`book with that ID ${req.params.id} was not found`)
+  }
+  catch {
+    res.status(404).json(`funny id ${req.params.id} was not found`);
+  }
+
+})
+
+module.exports = router;
