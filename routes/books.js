@@ -59,8 +59,31 @@ router.delete('/:id', async (req, res) => {
     else
       res.status(404).json(`book with that ID ${req.params.id} was not found`)
   }
-  catch {
-    res.status(404).json(`funny id ${req.params.id} was not found`);
+  catch (error) {
+    res.status(404).json(`funny id ${req.params.id} was not found` + error);
+  }
+
+})
+
+
+// Note this route will only update the properties passed to it and will 
+// leave others intact.
+
+
+router.put('/:id', async (req, res) => {
+
+  try {
+
+    const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (book) {
+      res.json(book);
+    }
+    else {
+      res.status(404).json('Not found');
+    }
+  }
+  catch (error) {
+    res.status(404).json('Not found: id is weird' + error);
   }
 
 })
