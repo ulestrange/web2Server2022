@@ -9,8 +9,7 @@ router.post('/', async (req, res) => {
   let book = new Book(req.body);
 
 try {
-  await book.validate()
-
+ 
   book = await book.save();
 
 
@@ -20,12 +19,6 @@ try {
     .json(book)
 }
 
-catch (error)
-{
-if (error == validationError)
-
-  res.status(422).send('validate error' + error)
-}
 catch (error) {
   res.status(500).send('db_error ' + error)
 }
@@ -33,12 +26,52 @@ catch (error) {
 
 });
 
+/// This route takes some filter, sorting, projecting and pageing information
+/// from the query string of the request
+/// the keyword title is used to filter for books which contain that word
+// it is case insensitive
+/// the keyword year is used to filter for year_written
+/// the pagesize and pagenumber can be used for paging.
 
 router.get('/', async (req, res) => {
 
+  const {title, year,  pagesize, pagenumber} = req.query;
+
+  let filter = {}
+
+  if (title) {
+    filter.title =  { $regex: `${title}`, $options: 'i' };
+  }
+
+  const yearNumber = parseInt(year);
+  
+  if (!isNaN(yearNumber)) {
+    Number.isInteger(year)
+    filter.year_written = yearNumber
+  }
+
+
+  let pageSizeNumber = parseInt(pagesize);
+
+  if (isNaN(pageSizeNumber)) {
+    pageSizeNumber = 0
+  }
+  let pageNumberNumber = parseInt(pagenumber);
+
+  if (isNaN(pageNumberNumber)) {
+    pageNumberNumber = 1
+  }
+
+
+
   try {
-    const books = await Book.find().lean();
+    const books = await Book
+    .find(filter)
+    .limit(pagesize)
+    .skip((pageNumberNumber -1)*pageSizeNumber)
+    .lean();
     res.json(books);
+
   }
   catch (error) {
     res.status(500).json('db error ' + error)

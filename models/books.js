@@ -2,19 +2,17 @@ const mongoose  = require('mongoose');
 
 const authorSchema = new mongoose.Schema({
     name: {type: String, required : true},
-    contact: String,
-    age: {type: Number, max : 4}
+    nationality: String
 })
 
 const bookSchema = new mongoose.Schema({
-    play: {type: Number, required : true},
-    title: String ,
+    title: String,
+    author: String ,
     year_written: Number,
-    author: [authorSchema]
+    author: authorSchema,
+    edition: String
 })
 
-bookSchema.set('validateBeforeSave', true);
-authorSchema.set('validateBeforeSave', true);
 
 const Book = mongoose.model('book', bookSchema);
 
