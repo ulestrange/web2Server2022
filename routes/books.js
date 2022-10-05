@@ -8,16 +8,28 @@ let books = [];
 router.post('/', async (req, res) => {
   let book = new Book(req.body);
 
-  try {
-    book = await book.save();
-    res
-      .location(`${book._id}`)
-      .status(201)
-      .json(book)
-  }
-  catch (error) {
-    res.status(500).send('db_error ' + error)
-  }
+try {
+  await book.validate()
+
+  book = await book.save();
+
+
+  res
+    .location(`${book._id}`)
+    .status(201)
+    .json(book)
+}
+
+catch (error)
+{
+if (error == validationError)
+
+  res.status(422).send('validate error' + error)
+}
+catch (error) {
+  res.status(500).send('db_error ' + error)
+}
+
 
 });
 
