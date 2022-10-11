@@ -1,27 +1,35 @@
 const express = require('express');
-const { Book } = require('../models/books')
+const { Book, ValidateBook } = require('../models/books')
 
 const router = express.Router();
 
 let books = [];
 
 router.post('/', async (req, res) => {
+
+  let result = ValidateBook(req.body)
+
+  if (result.error) {
+    res.status(400).json(result.error);
+    return;
+  }
+
   let book = new Book(req.body);
 
-try {
- 
-  book = await book.save();
+  try {
+
+    book = await book.save();
 
 
-  res
-    .location(`${book._id}`)
-    .status(201)
-    .json(book)
-}
+    res
+      .location(`${book._id}`)
+      .status(201)
+      .json(book)
+  }
 
-catch (error) {
-  res.status(500).send('db_error ' + error)
-}
+  catch (error) {
+    res.status(500).send('db_error ' + error)
+  }
 
 
 });
@@ -35,16 +43,16 @@ catch (error) {
 
 router.get('/', async (req, res) => {
 
-  const {title, year,  pagesize, pagenumber} = req.query;
+  const { title, year, pagesize, pagenumber } = req.query;
 
   let filter = {}
 
   if (title) {
-    filter.title =  { $regex: `${title}`, $options: 'i' };
+    filter.title = { $regex: `${title}`, $options: 'i' };
   }
 
   const yearNumber = parseInt(year);
-  
+
   if (!isNaN(yearNumber)) {
     Number.isInteger(year)
     filter.year_written = yearNumber
@@ -66,10 +74,10 @@ router.get('/', async (req, res) => {
 
   try {
     const books = await Book
-    .find(filter)
-    .limit(pagesize)
-    .skip((pageNumberNumber -1)*pageSizeNumber)
-    .lean();
+      .find(filter)
+      .limit(pagesize)
+      .skip((pageNumberNumber - 1) * pageSizeNumber)
+      .lean();
     res.json(books);
 
   }
@@ -117,6 +125,13 @@ router.delete('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
 
+  let result = ValidateBook(req.body)
+
+  if (result.error) {
+    res.status(400).json(result.error);
+    return;
+  }
+  
   try {
 
     const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
