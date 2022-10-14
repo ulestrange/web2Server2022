@@ -21,7 +21,11 @@ function ValidateBook(book) {
    })
 
     const bookJoiSchema = Joi.object({
-       title: Joi.string().min(3).required(),
+       title: Joi.string()
+       .min(3)
+       .required()
+       .messages({'string.empty': "you foool you left title blank",
+                  'any.required': "you fool you forgot the title field"}),
        author: authorJoiSchema,
        year_written: Joi.number().integer().min(1600) ,
        edition: Joi.string()
