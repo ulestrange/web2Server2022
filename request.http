@@ -28,8 +28,9 @@ content-type: application/json
 { "year_written": 2022}
 
 ###
-### POST Request for a book with no title - this should fail
+### POST Request for a book with a title - but a string for a year - this should fail
 POST http://localhost:3000/books HTTP/1.1
 content-type: application/json
 
-{ "year_written": 2022}
+{ "year_written": "this year",
+"title" : "The BEST"}
