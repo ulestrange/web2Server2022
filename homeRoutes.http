@@ -1,0 +1,11 @@
+
+###
+### For testing a plain get on the whole resource collection
+GET http://localhost:3000/books HTTP/1.1
+
+
+###
+#### test the collection filtering on title
+GET http://localhost:3000 HTTP/1.1
+
+
