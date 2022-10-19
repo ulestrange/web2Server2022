@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose')
 
-const connectionString = process.env.CONNECTIONSTRING
+const connectionString = process.env.CONNECTIONSTRING || 'mongodb://127.0.0.1:27017/web2_2022'
 
 mongoose
 .connect(connectionString,

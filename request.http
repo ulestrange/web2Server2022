@@ -1,0 +1,35 @@
+
+###
+### For testing a plain get on the whole resource collection
+GET http://localhost:3000/books HTTP/1.1
+
+
+###
+#### test the collection filtering on title
+GET http://localhost:3000/books?title=war HTTP/1.1
+
+
+########################
+######## this will
+GET http://localhost:3000/books/63340cde5def8f9f17677bd8 HTTP/1.1
+
+###
+### POST Request for a book with just a title
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+
+{ "title" : "a new book"}
+
+###
+### POST Request for a book with no title - this should fail
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+
+{ "year_written": 2022}
+
+###
+### POST Request for a book with no title - this should fail
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+
+{ "year_written": 2022}
