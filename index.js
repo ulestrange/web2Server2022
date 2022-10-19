@@ -1,6 +1,7 @@
 const express = require('express')
 
-
+require('dotenv').config();
+// note this required a .env file which is not in github
 
 // own  modules
 const db = require('./database');
@@ -8,7 +9,7 @@ const books = require('./routes/books')
 const home = require('./routes/home')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3001
 
 
 
