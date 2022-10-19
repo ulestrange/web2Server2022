@@ -1,27 +1,33 @@
 
 ###
 ### For testing a plain get on the whole resource collection
+## expected result an array of books
 GET http://localhost:3000/books HTTP/1.1
 
 
 ###
 #### test the collection filtering on title
+## expected result an array contains those books whose title inlcudes the word war
 GET http://localhost:3000/books?title=war HTTP/1.1
 
 
 ########################
-######## this will
+###GET and individual book
+## Expected result depends on whether the ID is in the collection if so an individual book is
+## returned if not a 404 not found
 GET http://localhost:3000/books/63340cde5def8f9f17677bd8 HTTP/1.1
 
 ###
 ### POST Request for a book with just a title
+## expeted result 201 Created with the id of the book in location and a book returned.
 POST http://localhost:3000/books HTTP/1.1
 content-type: application/json
 
 { "title" : "a new book"}
 
 ###
-### POST Request for a book with no title - this should fail
+### POST Request for a book with no title -
+## 400 with some JOI details inculding the title is required
 POST http://localhost:3000/books HTTP/1.1
 content-type: application/json
 
@@ -29,6 +35,7 @@ content-type: application/json
 
 ###
 ### POST Request for a book with a title - but a string for a year - this should fail
+## 400 with a message about year_written not being a number
 POST http://localhost:3000/books HTTP/1.1
 content-type: application/json
 
