@@ -1,7 +1,11 @@
 
+
 ###
-### For testing a plain get on the whole resource collection
-## expected result an array of books
+## this should fail with 404 as is on the collection not an individual
+DELETE http://localhost:3000/books HTTP/1.1
+
+###
+# should return an array of books - the whole collection
 GET http://localhost:3000/books HTTP/1.1
 
 
@@ -11,8 +15,13 @@ GET http://localhost:3000/books HTTP/1.1
 GET http://localhost:3000/books?title=war HTTP/1.1
 
 
+###
+# returns a collection of those books with year_written = 2022
+
+GET http://localhost:3000/books?year=2022 HTTP/1.1
+
 ########################
-###GET and individual book
+###GET an individual book
 ## Expected result depends on whether the ID is in the collection if so an individual book is
 ## returned if not a 404 not found
 GET http://localhost:3000/books/63340cde5def8f9f17677bd8 HTTP/1.1
@@ -41,3 +50,13 @@ content-type: application/json
 
 { "year_written": "this year",
 "title" : "The BEST"}
+
+###
+# comment goes here - will fail with 404 as on collection
+
+PUT http://localhost:3000/books/63340cde5def8f9f17677bd8 HTTP/1.1
+content-type: application/json
+
+{ "year_written": 2036,
+"title" : "2035"}
+
