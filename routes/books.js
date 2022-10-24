@@ -1,11 +1,14 @@
 const express = require('express');
+
+const validationMiddleware =  require('../middleware/jwtvalidaton'); // require('../middleware/jwtvalidation');
+
 const { Book, ValidateBook } = require('../models/books')
 
 const router = express.Router();
 
 let books = [];
 
-router.post('/', async (req, res) => {
+router.post('/', validationMiddleware.validJWTNeeded, async (req, res) => {
 
   let result = ValidateBook(req.body)
 

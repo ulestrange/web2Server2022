@@ -14,6 +14,8 @@ const router = express.Router();
 router.post('/local', passport.authenticate('local' ,{session:false}), async (req, res) => {
 
     // here the authenication middleware has verified the password and username
+    // the user details are now stored in a variable called req.user 
+    
     console.log('logged in now2');
 
 

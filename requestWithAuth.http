@@ -1,0 +1,58 @@
+
+
+### login
+# @name auth
+POST http://localhost:3000/auth/local HTTP/1.1
+content-type: application/json
+
+{ "username": "use4",
+"password" : "password1"}
+
+
+###
+### POST Request for a book with just a title
+## expeted result 201 Created with the id of the book in location and a book returned.
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{auth.response.body.accesstoken}}
+
+{ "title" : "a new book"}
+
+###
+### POST Request for a book with just a title
+## expeted result 201 Created with the id of the book in location and a book returned.
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlNCIsImlhdCI6MTY2NjYyMDI0OCwiZXhwIjoxNjY2NjIwMzA4fQ._7G5hXwSh6cETWkbdTFvzW3QwbKmzaSG-FWFJZO-qhg
+
+{ "title" : "a new book"}
+
+
+###
+### POST Request for a book with no title -
+## 400 with some JOI details inculding the title is required
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+
+
+
+{ "year_written": 2022}
+
+###
+### POST Request for a book with a title - but a string for a year - this should fail
+## 400 with a message about year_written not being a number
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+
+{ "year_written": "this year",
+"title" : "The BEST"}
+
+###
+# comment goes here - will fail with 404 as on collection
+
+PUT http://localhost:3000/books/63340cde5def8f9f17677bd8 HTTP/1.1
+content-type: application/json
+
+{ "year_written": 2036,
+"title" : "2035"}
+
