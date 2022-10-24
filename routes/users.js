@@ -1,8 +1,7 @@
-require('dotenv').config();
 const express = require('express');
 const { User } = require('../models/users')
-const jwt = require("jsonwebtoken");
-const { isRequired } = require('nodemon/lib/utils');
+
+
 
 const router = express.Router();
 

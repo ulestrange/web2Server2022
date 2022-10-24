@@ -9,7 +9,7 @@ var userSchema = new mongoose.Schema({
   roles:[{type: String, required: false}]
 });
 
-// this add some new mthods to our userschema
+// this add some new methods to our userschema
 // register let the user be added with appropriate encryption of the
 // password etc.
 
