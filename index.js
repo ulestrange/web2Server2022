@@ -1,16 +1,32 @@
-const express = require('express')
-
 require('dotenv').config();
 // note this required a .env file which is not in github
 
+const express = require('express');
+const passport = require('passport');
+const localStrategy = require('passport-local');
+const {User} = require('./models/users');
+
+
+
 // own  modules
 const db = require('./database');
-const books = require('./routes/books')
-const home = require('./routes/home')
+const books = require('./routes/books');
+const home = require('./routes/home');
+const auth = require('./routes/auth');
+const users = require('./routes/users');
 
 const app = express()
 const port = process.env.PORT || 3001
 
+
+// passport configuration
+
+// Passport Config
+passport.use(User.createStrategy());
+app.use(passport.initialize());
+//app.use(passport.session()); // is this needed?
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 
@@ -18,6 +34,8 @@ const port = process.env.PORT || 3001
 
 app.use('/', home)
  app.use('/books', books);
+ app.use('/users', users);
+ app.use('/auth', auth)
 
 
 
