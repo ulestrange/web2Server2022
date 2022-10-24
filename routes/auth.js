@@ -28,7 +28,7 @@ router.post('/local', passport.authenticate('local' ,{session:false}), async (re
         // sign the jwt and return it in the body of the request.       
 
         let token = jwt.sign(payload, process.env.JWTSECRET, { expiresIn: 60 * 5});
-        res.status(201).json({ accessToken: token });
+        res.status(201).json({ accesstoken: token });
         console.log('login success');
 
     }
