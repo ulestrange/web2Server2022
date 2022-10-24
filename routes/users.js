@@ -11,10 +11,11 @@ const router = express.Router();
 router.get('/' , (req, res) => res.send('get works'));
 
 router.post('/', async (req, res) => {
+    console.table(req.body);
 
     try {
-        await User.register(
-            new User({ name: req.body.name, username: req.body.username }),
+        let user = await User.register(
+          new User({ email:req.body.email, username:req.body.username }),
             req.body.password);
 
             res.location(user._id).

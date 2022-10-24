@@ -3,7 +3,8 @@ const  passportLocalMongoose = require("passport-local-mongoose");
 
 
 var userSchema = new mongoose.Schema({
-//extras go here
+  username: {type: String},
+  email: {type: String}
 });
 
 // query do I need the above since passportLocalMongoose adds them anyway???
