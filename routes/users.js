@@ -5,7 +5,7 @@ const { User } = require('../models/users')
 
 const router = express.Router();
 
-// post to /users with name username and password to login
+// post to /users with name username and password to create a new user
 
 
 router.post('/', async (req, res) => {

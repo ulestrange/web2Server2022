@@ -1,7 +1,7 @@
 
 
 ### login
-# @name auth
+# @name postlogin
 POST http://localhost:3000/auth/local HTTP/1.1
 content-type: application/json
 
@@ -9,12 +9,13 @@ content-type: application/json
 "password" : "password1"}
 
 
+
 ###
 ### POST Request for a book with just a title
 ## expeted result 201 Created with the id of the book in location and a book returned.
 POST http://localhost:3000/books HTTP/1.1
 content-type: application/json
-Authorization: Bearer {{auth.response.body.$.Data.accesstoken}}
+Authorization: Bearer {{postlogin.response.body.accesstoken}}
 
 { "title" : "a new book"}
 
@@ -23,9 +24,9 @@ Authorization: Bearer {{auth.response.body.$.Data.accesstoken}}
 ## expeted result 201 Created with the id of the book in location and a book returned.
 POST http://localhost:3000/books HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlNCIsImlhdCI6MTY2NjYyMDQyMywiZXhwIjoxNjY2NjIwNzIzfQ._kyJxB9f7bwCsDmkDWOpFOgAsZM8pJuf5pw7sVVbXv0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlNCIsImlhdCI6MTY2NjYyNzMxMiwiZXhwIjoxNjY2NjI3NjEyfQ.15XRNcitxxSSFWE1AnkMINl2Fqg4Q_9hjWqQ_bavmj0
 
-{ "title" : "a new book"}
+{ "title" : "a really new book"}
 
 
 ###

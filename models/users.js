@@ -5,7 +5,7 @@ const  passportLocalMongoose = require("passport-local-mongoose");
 // username and password are added automatically
 
 var userSchema = new mongoose.Schema({
-
+  email: String,
   roles:[{type: String, required: false}]
 });
 

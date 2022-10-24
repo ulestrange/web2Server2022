@@ -2,14 +2,10 @@ require('dotenv').config();
    
 const jwt = require('jsonwebtoken');
 
-const  crypto = require( 'crypto');
-
 
 
 
 let secret =  process.env.JWTSECRET // 
-
-
 
 
 // this 
@@ -21,7 +17,7 @@ function validJWTNeeded (req, res, next) {
         try {
             let authorization = req.headers['authorization'].split(' ');
             if (authorization[0] !== 'Bearer') {
-                return res.status(401).send();
+                return res.status(401).json({"error": "no Bearer token"});
             } else {
                 req.jwt = jwt.verify(authorization[1], secret);
                 return next();
@@ -31,7 +27,7 @@ function validJWTNeeded (req, res, next) {
             return res.status(403).json({error : err});
         }
     } else {
-        return res.status(401).send();
+        return res.status(401).json({"error": "no authorization header"});
     }
 };
 
