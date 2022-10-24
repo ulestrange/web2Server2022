@@ -15,7 +15,7 @@ router.post('/local', passport.authenticate('local' ,{session:false}), async (re
 
     // here the authenication middleware has verified the password and username
     // the user details are now stored in a variable called req.user 
-    
+
     console.log('logged in now2');
 
 
@@ -27,7 +27,7 @@ router.post('/local', passport.authenticate('local' ,{session:false}), async (re
 
         // sign the jwt and return it in the body of the request.       
 
-        let token = jwt.sign(payload, process.env.JWTSECRET, { expiresIn: 60 });
+        let token = jwt.sign(payload, process.env.JWTSECRET, { expiresIn: 60 * 5});
         res.status(201).json({ accessToken: token });
         console.log('login success');
 
