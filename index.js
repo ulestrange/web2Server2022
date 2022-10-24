@@ -24,13 +24,11 @@ const port = process.env.PORT || 3001
 // Passport Config
 passport.use(User.createStrategy());
 app.use(passport.initialize());
-//app.use(passport.session()); // is this needed?
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 
 
- app.use(express.json());
+
+app.use(express.json());
 
 app.use('/', home)
  app.use('/books', books);

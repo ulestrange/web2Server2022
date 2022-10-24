@@ -11,31 +11,26 @@ const router = express.Router();
 
 // post to auth/local with username and password to login
 
-router.post('/local', passport.authenticate('local'), async (req, res) => {
+router.post('/local', passport.authenticate('local' ,{session:false}), async (req, res) => {
 
     // here the authenication middleware has verified the password and username
-    console.post('logged in');
+    console.log('logged in now2');
 
-    try {
 
-        let user = User.findOne({ username: req.body.username });
-
-        // set the payload for the jwt.
         let payload = {};
-        payload._id = user._id;
-        payload.name = user.name;
+
+        payload.name = req.user.username;
+
+        console.table(payload);
 
         // sign the jwt and return it in the body of the request.       
 
-        let token = jwt.sign(payload, secret, { expiresIn: 60 });
+        let token = jwt.sign(payload, process.env.JWTSECRET, { expiresIn: 60 });
         res.status(201).json({ accessToken: token });
         console.log('login success');
 
     }
-    catch {
-        res.status(400).json({errors: 'error in rotue handler'})
-    }
-})
+)
 
 
 module.exports = router;
