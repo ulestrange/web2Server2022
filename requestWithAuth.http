@@ -24,7 +24,7 @@ Authorization: Bearer {{loginUsingAuthLocal.response.body.accesstoken}}
 ## expeted result 201 Created with the id of the book in location and a book returned.
 POST http://localhost:3000/books HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlNCIsImlhdCI6MTY2NjYyNzMxMiwiZXhwIjoxNjY2NjI3NjEyfQ.15XRNcitxxSSFWE1AnkMINl2Fqg4Q_9hjWqQ_bavmj0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlNCIsImlhdCI6MTY2NjcxNTY5NCwiZXhwIjoxNjY2NzE1OTk0fQ.WWfuNSzYxr2bENiJwPpfDovFMObpQ0KmHXbBTxOPR20
 
 { "title" : "a really new book"}
 
