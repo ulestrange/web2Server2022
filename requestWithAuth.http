@@ -1,7 +1,7 @@
 
 
 ### login
-# @name postlogin
+# @name loginUsingAuthLocal
 POST http://localhost:3000/auth/local HTTP/1.1
 content-type: application/json
 
@@ -15,9 +15,9 @@ content-type: application/json
 ## expeted result 201 Created with the id of the book in location and a book returned.
 POST http://localhost:3000/books HTTP/1.1
 content-type: application/json
-Authorization: Bearer {{postlogin.response.body.accesstoken}}
+Authorization: Bearer {{loginUsingAuthLocal.response.body.accesstoken}}
 
-{ "title" : "a new book"}
+{ "title" : "a new book from an authenciated"}
 
 ###
 ### POST Request for a book with just a title

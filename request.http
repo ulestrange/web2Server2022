@@ -2,16 +2,17 @@
 POST http://localhost:3000/users HTTP/1.1
 content-type: application/json
 
-{ "username": "user10",
+{ "username": "user25",
 "email" : "una@here.ie",
-"password" : "password10"}
+"password" : "password10",
+"roles": ["admin", "eidt"]}
 
 ### login
 
 POST http://localhost:3000/auth/local HTTP/1.1
 content-type: application/json
 
-{ "username": "use4",
+{ "username": "user25",
 "password" : "password1"}
 
 ###

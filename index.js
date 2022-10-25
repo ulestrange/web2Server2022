@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const express = require('express');
 const passport = require('passport');
-const localStrategy = require('passport-local');
 const {User} = require('./models/users');
 
 
@@ -19,7 +18,7 @@ const app = express()
 const port = process.env.PORT || 3001
 
 
-// passport configuration
+
 
 // Passport Config
 passport.use(User.createStrategy());
