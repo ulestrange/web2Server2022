@@ -7,7 +7,6 @@ const router = express.Router();
 
 // post to /users with name username and password to create a new user
 
-
 router.post('/', async (req, res) => {
   console.table(req.body);
 

@@ -1,8 +1,10 @@
+
+#createUser
 ###
 POST http://localhost:3000/users HTTP/1.1
 content-type: application/json
 
-{ "username": "user#100",
+{ "username": "user#101",
 "email" : "una@here.ie",
 "password" : "password10",
 "roles": ["admin", "edit"]}
@@ -12,7 +14,7 @@ content-type: application/json
 POST http://localhost:3000/auth/local HTTP/1.1
 content-type: application/json
 
-{ "username": "user#100",
+{ "username": "user#101",
 "password" : "password10"}
 
 ###
