@@ -29,6 +29,8 @@ app.use(passport.initialize());
 
 app.use(express.json());
 
+app.use('cors');
+
 app.use('/', home)
  app.use('/books', books);
  app.use('/users', users);
