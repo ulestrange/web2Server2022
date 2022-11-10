@@ -78,7 +78,7 @@ router.get('/', async (req, res) => {
   try {
     const books = await Book
       .find(filter)
-      .limit(10)
+      .limit(pageSizeNumber)
       .skip((pageNumberNumber - 1) * pageSizeNumber)
       .lean();
     res.json(books);
