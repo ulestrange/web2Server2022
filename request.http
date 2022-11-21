@@ -59,6 +59,16 @@ content-type: application/json
 
 { "title" : "a new book"}
 
+
+
+###
+### POST Request for a book 
+## works
+POST http://localhost:3000/books HTTP/1.1
+content-type: application/json
+
+{"title":"sunday","year_written":1900,"edition":"1","price":12.34,"author":{"name":"una","nationality":"lestrange"}}
+
 ###
 ### POST Request for a book with no title -
 ## 400 with some JOI details inculding the title is required

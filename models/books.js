@@ -10,7 +10,8 @@ const bookSchema = new mongoose.Schema({
     title: String,
     year_written: Number,
     author: authorSchema,
-    edition: String
+    edition: String,
+    price: Number
 })
 
 function ValidateBook(book) {
@@ -24,7 +25,8 @@ function ValidateBook(book) {
        title: Joi.string().min(3).required(),
        author: authorJoiSchema,
        year_written: Joi.number().integer().min(1600) ,
-       edition: Joi.string()
+       edition: Joi.string(),
+       price: Joi.number()
     })
     return bookJoiSchema.validate(book);
 }

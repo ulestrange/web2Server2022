@@ -38,8 +38,12 @@ var corsOptions = {
   }
 
 
+app.use('/books',  cors(corsOptions), books);
+
+
 app.use('/',  home); 
- app.use('/books',  cors(corsOptions), books);
+
+ app.use('/books',   books);
  app.use('/users', users);
  app.use('/auth', auth)
 

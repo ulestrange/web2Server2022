@@ -8,8 +8,9 @@ const router = express.Router();
 
 let books = [];
 
-router.post('/', validationMiddleware.validJWTNeeded, async (req, res) => {
 
+
+  router.post('/', async (req, res) => {
   let result = ValidateBook(req.body)
 
   if (result.error) {
