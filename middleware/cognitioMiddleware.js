@@ -13,7 +13,7 @@ const TOKEN_USE_ID = 'id'
 
 const MAX_TOKEN_AGE = 60 * 60 // 3600 seconds
 const ALLOWED_TOKEN_USES = [TOKEN_USE_ACCESS, TOKEN_USE_ID]
-const ISSUER = `https://cognito-idp.${appConfig.region}.amazonaws.com/${appConfig.userPool}`
+const ISSUER = `https://cognito-idp.${process.env.COGNITO_USER_POOL_REGION}.amazonaws.com/${process.env.COGNITIO_USER_POOL_ID}`
 
 class AuthError extends Error {}
 
