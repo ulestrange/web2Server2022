@@ -10,10 +10,12 @@ const {User} = require('./models/users');
 
 // own  modules
 const db = require('./database');
+const cognitoAuth = require('./middleware/cognitoAuth')
 const books = require('./routes/books');
 const home = require('./routes/home');
 const auth = require('./routes/auth');
 const users = require('./routes/users');
+
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -29,6 +31,10 @@ app.use(passport.initialize());
 
 
 app.use(express.json());
+app.use(cors());
+
+// all routes
+app.use(cognitoAuth.validateAuth)
 
 //app.use(cors());
 
