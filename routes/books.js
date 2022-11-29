@@ -1,7 +1,9 @@
 const express = require('express');
 
-const validationMiddleware =  require('../middleware/jwtvalidaton'); // require('../middleware/jwtvalidation');
+//const validationMiddleware =  require('../middleware/jwtvalidaton'); // require('../middleware/jwtvalidation');
 
+
+const {validateAuth0AccessToken} = require ('../middleware/auth0.middleware')
 const { Book, ValidateBook } = require('../models/books')
 
 const router = express.Router();
@@ -45,7 +47,9 @@ let books = [];
 /// the keyword year is used to filter for year_written
 /// the pagesize and pagenumber can be used for paging.
 
-router.get('/', async (req, res) => {
+router.get('/', validateAuth0AccessToken, async (req, res) => {
+
+ 
 
   const { title, year, pagesize, pagenumber } = req.query;
 
