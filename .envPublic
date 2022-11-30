@@ -1,0 +1,14 @@
+
+
+Note: This file is not used but is saved to github to show what the .env looks like
+
+PORT = 3000
+PORTSECURE = 8080S
+CONNECTIONSTRING =  'mongodb://127.0.0.1:27017/web2_2022'
+
+JWTSECRET = "not very secret",
+
+
+CLIENT_ORIGIN_URL=http://localhost:4200
+AUTH0_AUDIENCE=books
+AUTH0_DOMAIN=dev-fgdsgsdfgdsg.us.auth0.com
