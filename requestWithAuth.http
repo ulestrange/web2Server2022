@@ -1,3 +1,25 @@
+### Auth0testing
+# @name loginusingAuth0
+POST https://dev-htjrdxyu2p87zjsm.us.auth0.com/oauth/token
+content-type: application/json
+
+{"client_id":"NexMV3Aglp9w1rODmxjbZDFxzaJ17vCO","client_secret":"c_vQ1c-Du9V92YC6iYBoORZtXE23KquJJ8Iz8wnifXaMVRPjjPKLXSZupY7B9cs_","audience":"books","grant_type":"client_credentials"}
+
+
+
+###
+GET http://localhost:3000/books
+Authorization: Bearer {{loginusingAuth0.response.body.access_token}}
+
+
+
+###
+GET http://localhost:3000/books
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImRHSzA3emppWk1EZnRvOWJmVmZtbiJ9.eyJpc3MiOiJodHRwczovL2Rldi1odGpyZHh5dTJwODd6anNtLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJOZXhNVjNBZ2xwOXcxck9EbXhqYlpERnh6YUoxN3ZDT0BjbGllbnRzIiwiYXVkIjoiYm9va3MiLCJpYXQiOjE2Njk4MDA0MzYsImV4cCI6MTY2OTg4NjgzNiwiYXpwIjoiTmV4TVYzQWdscDl3MXJPRG14amJaREZ4emFKMTd2Q08iLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.S_2UhRuAK7jYsqV8zbgF0wqY_Av2LDQEm2VdLg-5Gj4_rV7CQTEy6Bc_07VwVrB1kVMC0fKwACtHkfLa8nnPBoFrfXeCfE304BKldf8lAmYWXisa6Ahet2L8rcHM9m6RZasRFkO-Xhd9VorXdlm2-G4Q-PS7x-d1vjRKebQIyR9tfYrIqoDXgaAq1oOYMplLN95Ot8B0rD5YwxkNwizgmKQTScZoIq5NYDkVv4J0OGQf4nCDg5IwGgbyMhouJySnNzPrEh6OMsJx3wFxi8eNd7SIeCPgJeA8HdCbqDrtUBLBAdepaNqPTRVLn7OrhIgQTd5AW1A8dD3w8x53QwA_Tw
+
+
+
+
 
 
 ### login
